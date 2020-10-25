@@ -1,5 +1,5 @@
 [
-{
+  {
   "nome":"Flash",
   "poder": "Velocidade",
   "id":1
