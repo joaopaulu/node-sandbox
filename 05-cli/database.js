@@ -26,8 +26,8 @@ class Database {
 
     const heroiComId = {...heroi, id }
         
-    return await this.escreverArquivo(...dados, heroiComId)
-    ;
+    return await this.escreverArquivo([...dados, heroiComId])
+    
   }
 
   async listar(id){
@@ -40,7 +40,7 @@ class Database {
     if(!id){
       return await this.escreverArquivo([])
     }
-    const dados = await this.obterDadosArquivo()
+    const dados = await this.obterArquivo()
     const indice = dados.findIndex(item => item.id === parseInt(id))
     if(indice === -1){
       throw Error('O usuario informado nao existe')
@@ -49,25 +49,21 @@ class Database {
     return await this.escreverArquivo(dados) 
   }
 
-  async atualizar(id, modificacoes){
-    const dados = await this. obterDadosArquivo()
+  async atualizar(id, atualizacoes){
+    const dados = await this.obterArquivo()
     const indice = dados.findIndex(item => item.id === parseInt(id))
 
     if (indice === -1){
       throw Error('O heroi informado nao existe')
     }
 
-    const atual = dados[indice]
-    const objetoAtualizar = {
-      ...atual,
-      ...modificacoes
-    }
+    const atual = dados[indice]    
     dados.splice(indice, 1)
 
-    return await this.escreverArquivo({
-      ...dados,
-      objetoAtualizar
-    })
+    const objAtualizado = JSON.parse(JSON.stringify(atualizacoes))
+    const dadoAtualizado = Object.assign({}, atual, objAtualizado)
+
+    return await this.escreverArquivo([...dados, dadoAtualizado])
   }
 }
 

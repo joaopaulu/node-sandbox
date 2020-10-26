@@ -1,9 +1,9 @@
-class Hero {
+class Heroi {
   constructor({ nome, poder, id }){
     this.nome = nome,
     this.poder = poder,
-    this.id= id
+    this.id = id
   }
 }
 
-module.exports = Hero
+module.exports = Heroi

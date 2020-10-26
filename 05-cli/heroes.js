@@ -1,1 +1,1 @@
-{"id":1,"nome":"Flash","poder":"Velocidade"}
+[{"nome":"Superman","poder":"Força","id":1603736491308},{"nome":"Aquaman","poder":"Mestre","id":1603736694877},{"nome":"Arlequina","poder":"Trapaças","id":1603739575302}]
