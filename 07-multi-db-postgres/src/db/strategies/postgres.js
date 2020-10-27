@@ -4,7 +4,7 @@ const Sequelize = require('sequelize')
 class Postgres extends ICrud{
   constructor(){
     super()
-    this.driver = null
+    this._driver = null
     this._herois = null
   }
   async isConnected(){
@@ -22,6 +22,15 @@ class Postgres extends ICrud{
       dataValues 
     } = await this._herois.create(item)
     return dataValues
+  }
+
+  async update(id, item){
+    return this._herois.update(item, { where: { id } });
+  }
+
+  async delete(id){
+    const query = id ? { id } : {}
+    return this._herois.destroy({where: query})
   }
 
   async read(item = {}){
