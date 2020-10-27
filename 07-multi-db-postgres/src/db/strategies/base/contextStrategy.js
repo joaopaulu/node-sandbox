@@ -23,7 +23,7 @@ class ContextStrategy extends ICrud{
   }
 
   isConnected(){
-    throw new NotImplementedException()
+    return this._database.isConnected();
   }
 }
 
