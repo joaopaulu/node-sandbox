@@ -24,6 +24,25 @@ class Postgres extends ICrud{
     return dataValues
   }
 
+  async read(item = {}){
+    return this._herois.findAll({where: item, raw: true})
+  }
+
+  async connect(){
+    this._driver = new Sequelize(
+      'heroes',
+      'postgres',
+      'docker',
+      {
+        host: 'localhost',
+        dialect: 'postgres',
+        quoteIdentifiers: 0,
+        operatorsAliases: 0
+      }
+    )
+    await this.defineModel()
+  }
+
   async defineModel(){
     this._herois = this._driver.define('herois', {
       id:{
@@ -47,22 +66,7 @@ class Postgres extends ICrud{
       timestamp: false
     })
     await this._herois.sync()
-  }
-
-   async connect(){
-    this._driver = new Sequelize(
-      'heroes',
-      'postgres',
-      'docker',
-      {
-        host: 'localhost',
-        dialect: 'postgres',
-        quoteIdentifiers: 0,
-        operatorsAliases: 0
-      }
-    )
-    await this.defineModel()
-  }
+  } 
 }
 
 module.exports = Postgres
